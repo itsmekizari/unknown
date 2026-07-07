@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Forလေားရှည်မ</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Comfortaa', 'Noto Sans Myanmar', sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; 
+            position: relative;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 50%, #f0e6ff 100%);
+        }
+
+        .hearts-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .heart-particle {
+            position: absolute;
+            bottom: -10%;
+            background-color: rgba(255, 107, 129, 0.4);
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            transform: rotate(-45deg);
+            animation: floatUp 10s infinite linear;
+        }
+
+        .heart-particle::before,
+        .heart-particle::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: inherit;
+        }
+
+        .heart-particle::before { top: -10px; left: 0; }
+        .heart-particle::after { top: 0; right: -10px; }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(-45deg) scale(0.5);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 0.8; }
+            100% {
+                transform: translateY(-110vh) rotate(-20deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .card {
+            background: linear-gradient(
+                135deg, 
+                rgba(255, 255, 255, 0.5), 
+                rgba(255, 230, 240, 0.4), 
+                rgba(230, 245, 255, 0.5),
+                rgba(255, 255, 255, 0.5)
+            );
+            background-size: 300% 300%;
+            
+            backdrop-filter: blur(25px) saturate(220%);
+            -webkit-backdrop-filter: blur(25px) saturate(220%);
+            
+            padding: 55px 30px;
+            border-radius: 40px; 
+            
+            box-shadow: 0 0 50px rgba(255, 107, 129, 0.2), 
+                        0 20px 50px rgba(0, 0, 0, 0.05),
+                        inset 0 0 30px rgba(255, 255, 255, 0.6);
+            
+            border: 2px solid rgba(255, 255, 255, 0.65);
+            text-align: center;
+            
+            width: 86%;
+            max-width: 390px; 
+            height: 480px; 
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+            position: relative;
+            z-index: 10; 
+            
+            animation: cardAnimate 6s ease infinite, premiumFloat 5s ease-in-out infinite; 
+        }
+
+        @keyframes cardAnimate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes premiumFloat {
+            0%, 100% { 
+                transform: translateY(0); 
+                box-shadow: 0 0 50px rgba(255, 107, 129, 0.15), 0 20px 50px rgba(0, 0, 0, 0.05);
+            }
+            50% { 
+                transform: translateY(-10px); 
+                box-shadow: 0 20px 60px rgba(255, 107, 129, 0.3), 0 30px 60px rgba(0, 0, 0, 0.08);
+            }
+        }
+
+        img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 15px 20px rgba(255, 121, 150, 0.2));
+        }
+
+        h2 {
+            color: #4c0519; 
+            font-size: 23px; 
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 30px; 
+            line-height: 1.4;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+            word-break: keep-all; 
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            height: 65px;
+            width: 100%;
+        }
+
+        button {
+            padding: 15px 38px; 
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 17px;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transform: skewX(-30deg);
+            animation: shineEffect 3s infinite ease-in-out;
+        }
+
+        @keyframes shineEffect {
+            0% { left: -150%; }
+            50%, 100% { left: 150%; }
+        }
+
+        #yes {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            color: white;
+            z-index: 1; 
+            box-shadow: 0 8px 25px rgba(255, 65, 108, 0.45), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            transform-origin: center;
+            max-width: 100vw;
+            max-height: 100vh;
+        }
+
+        #yes:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 65, 108, 0.6);
+        }
+
+        #yes:active { transform: translateY(1px) scale(0.98); }
+
+        #no {
+            background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+            color: white;
+            z-index: 99999 !important; 
+            box-shadow: 0 8px 25px rgba(0, 180, 219, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            transition: left 0.15s ease, top 0.15s ease, transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease;
+            transform-origin: center;
+        }
+
+        #no:hover {
+            box-shadow: 0 15px 30px rgba(0, 180, 219, 0.55);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="hearts-bg">
+    <div class="heart-particle" style="left: 10%; animation-delay: 0s; animation-duration: 12s;"></div>
+    <div class="heart-particle" style="left: 25%; animation-delay: 3s; animation-duration: 9s; background-color: rgba(255, 75, 110, 0.5);"></div>
+    <div class="heart-particle" style="left: 40%; animation-delay: 1s; animation-duration: 15s;"></div>
+    <div class="heart-particle" style="left: 55%; animation-delay: 5s; animation-duration: 10s; background-color: rgba(255, 143, 169, 0.4);"></div>
+    <div class="heart-particle" style="left: 70%; animation-delay: 2s; animation-duration: 13s;"></div>
+    <div class="heart-particle" style="left: 85%; animation-delay: 6s; animation-duration: 8s; background-color: rgba(255, 75, 110, 0.3);"></div>
+</div>
+
+<div class="card">
+    <img id="img" src="https://media.tenor.com/aveJW-reuDAAAAAd/sad-lonely.gif">
+    <h2 id="text">ချစ်သေးလားဟင်🥹</h2>
+
+    <div class="btn-group" id="btnGroup">
+        <button id="yes" onclick="showLove()">
+            Yes
+        </button>
+
+        <button id="no"
+            onmouseover="moveNo(event)"
+            onclick="moveNo(event)"
+            ontouchstart="moveNo(event)">
+            No
+        </button>
+    </div>
+</div>
+
+<script>
+let clickCount = 0;
+const totalClicks = 15; 
+
+function showLove(){
+    document.getElementById("img").src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-hug.gif";
+    
+    const textNode = document.getElementById("text");
+    textNode.innerText = "ကိုလည်း ချစ်ပါတယ်နော်💘";
+    textNode.style.color = "#ff416c"; 
+    textNode.style.marginBottom = "30px"; 
+
+    const btnGroup = document.getElementById("btnGroup");
+    btnGroup.style.opacity = "0";
+    btnGroup.style.pointerEvents = "none";
+    
+    const yesBtn = document.getElementById("yes");
+    yesBtn.style.display = "none"; 
+}
+
+function moveNo(event){
+    if(event){ event.preventDefault(); }
+
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+
+    const minX = window.innerWidth * 0.15;
+    const maxX = window.innerWidth * 0.75;
+    const minY = window.innerHeight * 0.15;
+    const maxY = window.innerHeight * 0.75;
+
+    const x = Math.random() * (maxX - minX) + minX;
+    const y = Math.random() * (maxY - minY) + minY;
+
+    noBtn.style.position = "fixed";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    clickCount++;
+
+    const maxScale = Math.max(window.innerWidth, window.innerHeight) / 10;
+    let progress = clickCount / totalClicks;
+    let rate = Math.pow(progress, 1.5); 
+
+    if (progress >= 1) {
+        noBtn.style.transform = `scale(0)`;
+        noBtn.style.opacity = `0`;
+        noBtn.style.display = "none";
+        
+        yesBtn.style.transform = `scale(${maxScale})`;
+    } else {
+        let yesScale = 1 + (maxScale - 1) * rate;
+        yesBtn.style.transform = `scale(${yesScale})`;
+
+        let noScale = 1 - rate;
+        let noOpacity = 1 - rate;
+        
+        noBtn.style.transform = `scale(${noScale})`;
+        noBtn.style.opacity = noOpacity;
+    }
+}
+</script>
+
+</body>
+</html>
